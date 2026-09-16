@@ -1,32 +1,35 @@
-# React + TypeScript + Vite
+# AI Client Brief Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A lightweight SaaS tool built with React, TypeScript, and Supabase that transforms raw client project requests into structured technical briefs using AI-powered analysis.
 
-Currently, two official plugins are available:
+## Tech Stack
+- **Frontend**: React 19, TypeScript, Vite, React Router (`HashRouter`)
+- **Backend**: Supabase Auth, PostgreSQL, Row Level Security (RLS)
+- **AI Integration**: Supabase Edge Function (`analyze-brief`) with OpenAI-compatible API abstraction
+- **Testing**: Vitest
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Status
+MVP implementation complete. Demonstrates secure architecture where AI API keys and prompts are executed strictly server-side inside Supabase Edge Functions, keeping client-side dependencies light and secure.
 
-## React Compiler
+## Local Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Expanding the Oxlint configuration
+2. Configure environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Add your `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` to `.env.local`.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+4. Run tests:
+   ```bash
+   npm run test
+   ```
