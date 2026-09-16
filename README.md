@@ -48,10 +48,9 @@ Freelancers and agencies frequently receive unstructured, ambiguous project inqu
 
 ## Preview
 
-<!-- Add production screenshot here -->
-<!--
 ![AI Client Brief Assistant Dashboard](docs/screenshots/dashboard.png)
--->
+
+> Production dashboard showing analyzed brief history and complexity KPI breakdown.
 
 ---
 
