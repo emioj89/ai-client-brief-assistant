@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/emioj89/ai-client-brief-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/emioj89/ai-client-brief-assistant/actions/workflows/ci.yml)
 ![React](https://img.shields.io/badge/React-19-blue?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-blue?logo=typescript)
 ![Supabase](https://img.shields.io/badge/Supabase-Database%20%26%20Auth-emerald?logo=supabase)
 
 AI-powered SaaS tool that transforms raw client requests into structured technical project briefs.
@@ -37,7 +37,7 @@ Freelancers and agencies frequently receive unstructured, ambiguous project inqu
 - **Protected Routing**: Navigation guards ensuring secure access to dashboard and analysis tools (`ProtectedRoute` and `PublicOnlyRoute`).
 - **AI-Powered Analysis**: Instant conversion of unstructured text into structured technical briefs.
 - **Requirement Grounding**: Strict separation between confirmed client requests, technical assumptions, and unconfirmed future features.
-- **Dashboard & History**: Centralized view of all analyzed briefs with KPI counters (Total Briefs, Complexity breakdown, High Complexity alerts).
+- **Dashboard & History**: Centralized view of all analyzed briefs with complexity KPI breakdown (Total Briefs, Low, Medium, and High complexity counters).
 - **Search & Filtering**: Real-time filtering by project title, client name, or complexity tier.
 - **Detailed Scoping View**: Full breakdown of technical deliverables, risks, task lists, and phase milestones.
 - **Client Communication Helper**: One-click copyable email draft to respond to client inquiries immediately.
@@ -94,7 +94,7 @@ AI Client Brief Assistant enforces strict **grounding and anti-inference rules**
 - **Assumptions Isolation**: Unconfirmed technical details (payment providers, shipping logic, inventory engines, hosting constraints) are placed strictly into `risksAndAssumptions`.
 - **Missing Questions**: Architectural, budget, and scope ambiguities are converted into actionable questions under `missingQuestions`.
 - **Future Scope Separation**: Requests containing phrases like "later", "in the future", or "eventually" are isolated into future scope phases and not treated as part of the initial MVP.
-- **Prompt Injection Defense**: Client input is wrapped and analyzed as untrusted content, preventing user text from overriding system directives.
+- **Prompt Injection Defense**: Client input is isolated as untrusted content and system-level instructions are used to reduce prompt-injection risk.
 
 ---
 
@@ -204,8 +204,9 @@ To deploy your own backend instance:
    ```bash
    npx supabase secrets set AI_API_KEY="your-openrouter-or-openai-api-key"
    npx supabase secrets set AI_API_URL="https://openrouter.ai/api/v1/chat/completions"
-   npx supabase secrets set AI_MODEL="google/gemini-2.0-flash-001"
+   npx supabase secrets set AI_MODEL="your-model-id"
    ```
+   *(Note: The Edge Function communicates via an OpenAI-compatible HTTP chat completions endpoint; the exact model ID depends on your chosen AI provider).*
 4. **Auth Settings**: In the Supabase Dashboard under Auth Settings, add your site URL (e.g., `https://emioj89.github.io/ai-client-brief-assistant/`) to Redirect URLs.
 
 ---
