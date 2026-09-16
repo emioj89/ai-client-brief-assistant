@@ -104,7 +104,7 @@ AI Client Brief Assistant enforces strict **grounding and anti-inference rules**
 - **No Service-Role Leakage**: Frontend uses only `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. No secret or service-role keys are used in the web application.
 - **Row Level Security (RLS)**: Public tables (`briefs`) have RLS enabled with explicit policy grants restricted to `authenticated` users matching `(select auth.uid()) = user_id`. Anonymous access (`anon`) is revoked.
 - **JWT Verification**: Edge functions verify user authenticity via Supabase Auth JWT headers before executing analysis or database writes.
-- **Untrusted Content Handling**: Client request payloads are treated strictly as unverified data to prevent prompt injection attacks.
+- **Untrusted Content Handling**: Client request payloads are treated as untrusted data and isolated from system-level instructions to reduce prompt-injection risk.
 
 ---
 
